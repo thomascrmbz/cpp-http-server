@@ -8,8 +8,5 @@ namespace HTTP {
 
     public:
       void listen(int port) const;
-
-    private:
-      int port;
   };
 }

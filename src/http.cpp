@@ -56,7 +56,7 @@ void Server::listen(int port) const {
     }
 
     read(new_socket, buffer, 1024);
-    printf("%s\n", buffer);
+    Request request(buffer);
 
 
     auto f = [](int socket) {

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <sstream>
 #include <vector>
 #include <iostream>
 #include <cstring>
@@ -26,13 +25,13 @@ std::vector<std::string> StringHelper::split(std::string str) const {
 
 std::vector<std::string> StringHelper::buffer_to_vector(char* buffer) const {
   std::vector<std::string> lines;
-  std::stringstream ss;
-
+  std::string str = "";
   for (int i = 0; i < std::strlen(buffer); i++) {
     if (buffer[i] == '\n') {
-      lines.push_back(ss.str());
-      ss.clear();
-    } else ss << buffer[i];
+      lines.push_back(str);
+      str = "";
+    }
+    else str += buffer[i];
   }
 
   return lines;

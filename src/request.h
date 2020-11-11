@@ -11,12 +11,15 @@ namespace HTTP {
       Request(char buffer[1024]);
 
     public:
+      std::string get_method(void) const;
+      std::string get_path(void) const;
+      std::string get_version(void) const;
       std::vector<HTTP::Header> get_headers(void) const;
 
     private:
-      std::vector<HTTP::Header> headers = {};
       std::string method;
       std::string path;
       std::string version;
+      std::vector<HTTP::Header> headers = {};
   };
 }

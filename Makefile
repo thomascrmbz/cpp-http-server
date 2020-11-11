@@ -2,7 +2,7 @@ all: main.o http.o response.o request.o header.o
 	c++ main.o http.o response.o request.o header.o
 
 main.o: main.cpp
-	c++ -c main.cpp
+	c++ --std=c++11 -c main.cpp
 
 http.o: src/http.cpp
 	c++ --std=c++11 -c src/http.cpp

@@ -55,7 +55,7 @@ void Server::listen(int port) const {
       exit(0);
     }
 
-    auto connection_handler = [](int socket) {
+    auto connection_handler = [this](int socket) {
       while (true) {
         char buffer[1024];
         bzero(buffer, 1024);
@@ -65,11 +65,7 @@ void Server::listen(int port) const {
           break;
         }
 
-        Request request(buffer);
-
-        std::string text = "HTTP/1.1 200 OK\n\nHello World!";
-        send(socket, text.c_str(), text.length(), 0);
-        close(socket);
+        handle(Request(buffer), Response(socket));
       }
     };
 

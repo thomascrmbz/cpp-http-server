@@ -1,8 +1,14 @@
-all: main.o http.o response.o request.o header.o
-	c++ main.o http.o response.o request.o header.o
+all: example.o http.o response.o request.o header.o
+	c++ example.o http.o response.o request.o header.o
 
-main.o: main.cpp
-	c++ --std=c++11 -c main.cpp
+example.o: example.cpp
+	c++ --std=c++11 -c example.cpp
+
+test: test.o http.o response.o request.o header.o
+	c++ test.o http.o response.o request.o header.o
+
+test.o: test.cpp
+	c++ --std=c++11 -c test.cpp
 
 http.o: src/http.cpp
 	c++ --std=c++11 -c src/http.cpp

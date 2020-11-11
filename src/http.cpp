@@ -55,7 +55,7 @@ void Server::listen(int port) const {
       exit(0);
     }
 
-    auto connection_thread = [](int socket) {
+    auto connection_handler = [](int socket) {
       while (true) {
         char buffer[1024];
         bzero(buffer, 1024);
@@ -66,18 +66,16 @@ void Server::listen(int port) const {
         }
 
         Request request(buffer);
-        
-        std::cout << "path: " << request.get_path() << std::endl;
-        std::cout << "content lines: " << request.get_content().size() << std::endl;
 
         std::string text = "HTTP/1.1 200 OK\n\nHello World!";
         send(socket, text.c_str(), text.length(), 0);
-        printf("response message sent\n\n");
         close(socket);
       }
     };
 
-    std::thread th(connection_thread, new_socket);
-    th.join();
+    // std::thread th(connection_thread, new_socket); // this is not multithreading @todo multithreading
+    // th.join();
+    connection_handler(new_socket);
+
   }
 }

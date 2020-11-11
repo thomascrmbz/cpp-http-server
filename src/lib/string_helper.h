@@ -33,6 +33,8 @@ std::vector<std::string> StringHelper::buffer_to_vector(char* buffer) const {
     }
     else str += buffer[i];
   }
+  
+  if (str.length() > 0) lines.push_back(str);
 
   return lines;
 }

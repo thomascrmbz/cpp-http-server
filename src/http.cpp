@@ -68,6 +68,7 @@ void Server::listen(int port) const {
         Request request(buffer);
         
         std::cout << "path: " << request.get_path() << std::endl;
+        std::cout << "content lines: " << request.get_content().size() << std::endl;
 
         std::string text = "HTTP/1.1 200 OK\n\nHello World!";
         send(socket, text.c_str(), text.length(), 0);

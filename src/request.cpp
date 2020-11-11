@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "request.h"
+#include "header.h"
 #include "lib/string_helper.h"
 
 using namespace HTTP;
@@ -15,6 +16,21 @@ Request::Request(char buffer[1024]) {
   this->method = head[0];
   this->path = head[1];
   this->version = head[2];
+
+  int content_index = 0;
+
+  for (int i = 1; i < lines.size(); i++) {
+    if (lines[i][0] == '\r') {
+      content_index = i + 1;
+      break;
+    }
+    std::vector<std::string> header = StringHelper().split(lines[i]);
+    std::string key = header[0];
+    key.pop_back();
+    this->headers.push_back(Header(key, header[1]));
+  }
+
+  for (int i = content_index; i < lines.size(); i++) content.push_back(lines[i]);
 }
 
 std::string Request::get_method(void) const {
@@ -31,4 +47,8 @@ std::string Request::get_version(void) const {
 
 std::vector<HTTP::Header> Request::get_headers(void) const {
   return this->headers;
+}
+
+std::vector<std::string> Request::get_content(void) const {
+  return this->content;
 }

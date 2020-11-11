@@ -15,11 +15,13 @@ namespace HTTP {
       std::string get_path(void) const;
       std::string get_version(void) const;
       std::vector<HTTP::Header> get_headers(void) const;
+      std::vector<std::string> get_content(void) const;
 
     private:
       std::string method;
       std::string path;
       std::string version;
       std::vector<HTTP::Header> headers = {};
+      std::vector<std::string> content = {};
   };
 }

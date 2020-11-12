@@ -11,17 +11,24 @@ namespace HTTP {
       Response(int socket);
 
     public:
-      int get_status(void) const;
+      std::string get_status(void) const;
+      std::string get_content(void) const;
       std::vector<HTTP::Header> get_headers(void) const;
-      std::string to_string(void) const;
+
+    public:
+      void set_status(std::string status);
       void set_content(std::string content);
+      void set_headers(std::vector<HTTP::Header> headers);
+
+    public:
+      std::string to_string(void) const;
 
     public:
       void send(void) const;
 
     private:
-      int status;
       int socket;
+      std::string status;
       std::string content;
       std::vector<HTTP::Header> headers = {};
   };

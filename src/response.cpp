@@ -7,11 +7,16 @@ using namespace HTTP;
 
 Response::Response(int socket) {
   this->socket = socket;
-  this->content = "Hello World!";
+  this->set_content("Hello World!");
+  this->set_status("200 OK");
 }
 
-int Response::get_status(void) const {
+std::string Response::get_status(void) const {
   return this->status;
+}
+
+std::string Response::get_content(void) const {
+  return this->content;
 }
 
 std::vector<HTTP::Header> Response::get_headers(void) const {
@@ -22,8 +27,16 @@ void Response::set_content(std::string content) {
   this->content = content;
 }
 
+void Response::set_headers(std::vector<HTTP::Header> headers) {
+  this->headers = headers;
+}
+
+void Response::set_status(std::string status) {
+  this->status = status;
+}
+
 std::string Response::to_string(void) const {
-  return "HTTP/1.1 200 OK\n\n" + content + "\n";
+  return "HTTP/1.1 " + this->get_status() + "\n\n" + this->content + "\n";
 }
 
 void Response::send(void) const {

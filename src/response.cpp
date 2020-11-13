@@ -36,7 +36,9 @@ void Response::set_status(std::string status) {
 }
 
 std::string Response::to_string(void) const {
-  return "HTTP/1.1 " + this->get_status() + "\n\n" + this->content + "\n";
+  std::string response = "HTTP/1.1 " + this->get_status() + "\n";
+  for (HTTP::Header header : this->get_headers()) response += header.to_string() + "\n";
+  return response + "\n" + this->content;
 }
 
 void Response::send(void) const {

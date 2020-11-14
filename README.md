@@ -1,6 +1,9 @@
-# C++ HTTP-Server
-
-Simple and fast HTTP-Server build on C++11
+<h1 align="center">
+  C++ HTTP-Server
+</h1>
+<h3 align="center">
+  Simple and fast HTTP-Server build on C++11
+</h3>
 
 # Getting Started
 
@@ -24,6 +27,45 @@ int main() {
 
   return 0;
 }
+```
+
+## Request
+
+```c++
+std::string get_method(void) const;
+std::string get_path(void) const;
+std::string get_version(void) const;
+std::vector<HTTP::Header> get_headers(void) const;
+std::vector<std::string> get_content(void) const;
+```
+
+## Response
+
+```c++
+std::string get_status(void) const;
+std::string get_content(void) const;
+std::vector<HTTP::Header> get_headers(void) const;
+
+void set_status(std::string status);
+void set_content(std::string content);
+void set_headers(std::vector<HTTP::Header> headers);
+
+std::string to_string(void) const;
+void send(void) const;
+```
+
+## Header
+
+```c++
+Header(std::string key, std::string value);
+
+std::string get_key(void) const;
+std::string get_value(void) const;
+
+void set_key(std::string key);
+void set_value(std::string value);
+
+std::string to_string(void) const;
 ```
 
 # License

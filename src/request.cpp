@@ -27,7 +27,13 @@ Request::Request(char buffer[1024]) {
     std::vector<std::string> header = StringHelper().split(lines[i]);
     std::string key = header[0];
     key.pop_back();
-    this->headers.push_back(Header(key, header[1]));
+
+    std::string value;
+    header.erase(header.begin());
+    for (const auto &s : header) value += s + " ";
+    value.pop_back();
+
+    this->headers.push_back(Header(key, value));
   }
 
   for (int i = content_index; i < lines.size(); i++) content.push_back(lines[i]);

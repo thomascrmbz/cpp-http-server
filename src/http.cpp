@@ -16,6 +16,10 @@ Server::Server(void) {
   
 }
 
+Server::Server(bool while_loop) {
+  this->while_loop = while_loop;
+}
+
 void Server::listen(int port) const {
   int socket;
   struct sockaddr_in address;
@@ -45,7 +49,7 @@ void Server::listen(int port) const {
     exit(0);
   }
 
-  while (true) {
+  do {
     int new_socket = 0;
     struct sockaddr_in client_addr;
     int addrlen = sizeof(client_addr);
@@ -72,6 +76,5 @@ void Server::listen(int port) const {
     // std::thread th(connection_thread, new_socket); // this is not multithreading @todo multithreading
     // th.join();
     connection_handler(new_socket);
-
-  }
+  } while (this->while_loop);
 }

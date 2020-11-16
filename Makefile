@@ -1,26 +1,23 @@
-all: example.o http.o response.o request.o header.o
-	c++ example.o http.o response.o request.o header.o
+all: mkdir library
 
-example.o: example.cpp
-	c++ --std=c++11 -c example.cpp
+mkdir:
+	mkdir -p bin
 
-test: test.o http.o response.o request.o header.o
-	c++ test.o http.o response.o request.o header.o
+library: bin/http.o bin/response.o bin/request.o bin/header.o
+	ar -r bin/libHTTP.a bin/http.o bin/response.o bin/request.o bin/header.o
 
-test.o: test.cpp
-	c++ --std=c++11 -c test.cpp
+example: all
+	g++ -c --std=c++11 example.cpp -I./src -o bin/example.o
+	g++ --std=c++11 bin/example.o -L./bin -lHTTP -o example.out
 
-http.o: src/http.cpp
-	c++ --std=c++11 -c src/http.cpp
-
-response.o: src/response.cpp
-	c++ --std=c++11 -c src/response.cpp
-
-request.o: src/request.cpp
-	c++ --std=c++11 -c src/request.cpp
-
-header.o: src/header.cpp
-	c++ --std=c++11 -c src/header.cpp
+bin/http.o:
+	c++ --std=c++11 -c src/http.cpp -o bin/http.o
+bin/response.o:
+	c++ --std=c++11 -c src/response.cpp -o bin/response.o
+bin/request.o:
+	c++ --std=c++11 -c src/request.cpp -o bin/request.o
+bin/header.o:
+	c++ --std=c++11 -c src/header.cpp -o bin/header.o
 
 clean:
-	rm *.o a.out
+	rm -rf bin/*

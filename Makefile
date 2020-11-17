@@ -3,7 +3,7 @@ all: mkdir library
 mkdir:
 	mkdir -p bin
 
-library: bin/http.o bin/response.o bin/request.o bin/header.o
+library: mkdir bin/http.o bin/response.o bin/request.o bin/header.o
 	ar -r bin/libHTTP.a bin/http.o bin/response.o bin/request.o bin/header.o
 
 example: all

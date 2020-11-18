@@ -11,6 +11,7 @@ int main() {
     res.set_headers(headers);
     res.set_content("Hello World!");
     res.send();
+    res.close();
   };
 
   server.listen(8080);

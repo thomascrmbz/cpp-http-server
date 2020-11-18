@@ -21,6 +21,7 @@ int main() {
     res.set_headers(headers);
     res.set_content("Hello World!");
     res.send();
+    res.close();
   };
 
   server.listen(8080);
@@ -52,6 +53,7 @@ void set_headers(std::vector<HTTP::Header> headers);
 
 std::string to_string(void) const;
 void send(void) const;
+void close(void) const;
 ```
 
 ## Header

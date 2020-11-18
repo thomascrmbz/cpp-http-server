@@ -25,6 +25,7 @@ namespace HTTP {
 
     public:
       void send(void) const;
+      void close(void) const;
 
     private:
       int socket;

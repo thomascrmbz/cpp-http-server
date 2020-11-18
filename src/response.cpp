@@ -43,5 +43,8 @@ std::string Response::to_string(void) const {
 
 void Response::send(void) const {
   ::send(this->socket, this->to_string().c_str(), this->to_string().length(), 0);
+}
+
+void Response::close(void) const {
   ::close(this->socket);
 }

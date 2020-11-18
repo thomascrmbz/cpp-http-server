@@ -23,6 +23,10 @@ std::vector<HTTP::Header> Response::get_headers(void) const {
   return this->headers;
 }
 
+int Response::_get_socket(void) const {
+  return this->socket;
+}
+
 void Response::set_content(std::string content) {
   this->content = content;
 }

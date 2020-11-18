@@ -60,17 +60,17 @@ void Server::listen(int port) const {
     }
 
     auto connection_handler = [this](int socket) {
-      while (true) {
+      // while (true) {
         char buffer[1024];
         bzero(buffer, 1024);
 
         if (read(socket, buffer, 1024) <= 0) {
           close(socket);
-          break;
+          // break;
         }
 
         handle(Request(buffer), Response(socket));
-      }
+      // }
     };
 
     // std::thread th(connection_thread, new_socket); // this is not multithreading @todo multithreading

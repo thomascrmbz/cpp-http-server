@@ -16,6 +16,7 @@ namespace HTTP {
       std::string get_version(void) const;
       std::vector<HTTP::Header> get_headers(void) const;
       std::vector<std::string> get_content(void) const;
+      HTTP::Header get_header(std::string key) const;
 
     private:
       std::string method;

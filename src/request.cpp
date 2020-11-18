@@ -58,3 +58,11 @@ std::vector<HTTP::Header> Request::get_headers(void) const {
 std::vector<std::string> Request::get_content(void) const {
   return this->content;
 }
+
+HTTP::Header Request::get_header(std::string key) const {
+  for (Header header : this->get_headers()) {
+    if (header.get_key() == key) return header;
+  }
+
+  return Header("", "");
+}
